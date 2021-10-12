@@ -6,6 +6,12 @@ namespace Lab1
 {
     public static class AlgorithmGorner
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="k">Коэффициенты по возрастанию</param>
+        /// <returns></returns>
         public static double OrdinaryFunction(int x, double[] k)
         {
             double result = 0;
@@ -17,6 +23,12 @@ namespace Lab1
             return result;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="k">Коэффициенты по убыванию</param>
+        /// <returns></returns>
         public static double CalculateWithFor(int x, double[] k)
         {
             double result = k[0];
@@ -30,6 +42,12 @@ namespace Lab1
             return result;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="k">Коэффициенты по возрастанию</param>
+        /// <returns></returns>
         public static double CalculateWithForNegativeStep(int x, double[] k)
         {
             double result = k[^1];
@@ -42,6 +60,12 @@ namespace Lab1
             return result;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="k">Коэффициенты по убыванию</param>
+        /// <returns></returns>
         public static double CalculateWithWhile(int x, double[] k)
         {
             double result = k[0];
@@ -57,6 +81,12 @@ namespace Lab1
             return result;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="k">Коэффициенты по возрастанию</param>
+        /// <returns></returns>
         public static double CalculateWithWhileNegativeStep(int x, double[] k)
         {
             double result = k[^1];
@@ -72,11 +102,18 @@ namespace Lab1
             return result;
         }
         
-        public static double CalculateRecursively(double x, double[] a, int i = 0)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="k">Коэффициенты по возрастанию</param>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public static double CalculateRecursively(double x, double[] k, int i = 0)
         {
-            if (i >= a.Length)
+            if (i >= k.Length)
                 return 0;
-            return a[i] + x * CalculateRecursively(x, a, i + 1);
+            return k[i] + x * CalculateRecursively(x, k, i + 1);
         }
     }
 }
