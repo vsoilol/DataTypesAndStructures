@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace Lab1
 {
@@ -8,69 +9,35 @@ namespace Lab1
     {
         private static void Main(string[] args)
         {
-            Random random = new Random();
-            Stopwatch stopwatch = new Stopwatch();
-            double result;
-            int x = -5;
-            double[] k = new double[400]; // В порядке возрастания
+            Console.OutputEncoding = Encoding.UTF8;
 
-            for (int i = 0; i < k.Length; i++)
+            double result;
+
+            int coefficientNumbers = ConsoleProvider.ReturnEnteredNumber(ConsoleProvider.EnterDegreeOfPolynomial);
+            int x = ConsoleProvider.ReturnEnteredNumber(ConsoleProvider.EnterX);
+            int[] coefficients = new int[coefficientNumbers + 1];
+
+            for (int i = 0; i < coefficients.Length; i++)
             {
-                k[i] = random.Next(-50, 50);
+                coefficients[i] = ConsoleProvider.ReturnEnteredNumber(string.Format(ConsoleProvider.EnterCoefficient, i + 1));
             }
 
-            double[] reverseK = k.Reverse().ToArray(); // В порядке убывания
+            int[] reverseK = coefficients.Reverse().ToArray(); // В порядке убывания
 
-            stopwatch.Start();
-            result = AlgorithmGorner.OrdinaryFunction(x, k);
-            stopwatch.Stop();
+            result = AlgorithmGorner.OrdinaryFunction(x, coefficients);
+            Console.WriteLine($"Ordinary result: {result}");
 
-            Console.WriteLine($"Ordinary result: {result}, time: {stopwatch.Elapsed}");
-
-            stopwatch.Reset();
-            stopwatch.Start();
             result =
-                AlgorithmGorner.CalculateRecursively(x, k);
-            stopwatch.Stop();
-            Console.WriteLine($"Gorner recursively: " +
-                              $"{result} " +
-                              $"time: {stopwatch.Elapsed}");
-
-            stopwatch.Reset();
-            stopwatch.Start();
-            result =
-                AlgorithmGorner.CalculateWithFor(x, reverseK);
-            stopwatch.Stop();
+                AlgorithmGorner.CalculateWithFor(x, reverseK, out int laborIntensity);
             Console.WriteLine($"Gorner with FOR: " +
                               $"{result} " +
-                              $"time: {stopwatch.Elapsed}");
+                              $"labor intensity: {laborIntensity}");
 
-            stopwatch.Reset();
-            stopwatch.Start();
             result =
-                AlgorithmGorner.CalculateWithForNegativeStep(x, k);
-            stopwatch.Stop();
+                AlgorithmGorner.CalculateWithForNegativeStep(x, coefficients, out int laborIntensity1);
             Console.WriteLine($"Gorner with FOR negative step: " +
                               $"{result} " +
-                              $"time: {stopwatch.Elapsed}");
-
-            stopwatch.Reset();
-            stopwatch.Start();
-            result =
-                AlgorithmGorner.CalculateWithWhile(x, reverseK);
-            stopwatch.Stop();
-            Console.WriteLine($"Gorner with While: " +
-                              $"{result} " +
-                              $"time: {stopwatch.Elapsed}");
-
-            stopwatch.Reset();
-            stopwatch.Start();
-            result =
-                AlgorithmGorner.CalculateWithWhileNegativeStep(x, k);
-            stopwatch.Stop();
-            Console.WriteLine($"Gorner with While negative step: " +
-                              $"{result} " +
-                              $"time: {stopwatch.Elapsed}");
+                              $"labor intensity: {laborIntensity1}");
         }
     }
 }

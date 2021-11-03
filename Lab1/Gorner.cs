@@ -12,7 +12,7 @@ namespace Lab1
         /// <param name="x"></param>
         /// <param name="k">Коэффициенты по возрастанию</param>
         /// <returns></returns>
-        public static double OrdinaryFunction(int x, double[] k)
+        public static double OrdinaryFunction(int x, int[] k)
         {
             double result = 0;
             for (int i = 0; i < k.Length; i++)
@@ -24,96 +24,49 @@ namespace Lab1
         }
         
         /// <summary>
-        /// 
+        /// Алгоритм схемы Горнера с использованием арифметического цикла
         /// </summary>
         /// <param name="x"></param>
         /// <param name="k">Коэффициенты по убыванию</param>
         /// <returns></returns>
-        public static double CalculateWithFor(int x, double[] k)
+        public static double CalculateWithFor(int x, int[] k, out int laborIntensity)
         {
             double result = k[0];
+            laborIntensity = 4;
             
             for (int i = 1; i < k.Length; i++)
             {
+                laborIntensity += 2;
                 result *= x;
                 result += k[i];
+
+                laborIntensity += 3;
             }
 
             return result;
         }
         
         /// <summary>
-        /// 
+        /// Алгоритм схемы Горнера с арифметическим циклом с отрицательным шагом
         /// </summary>
         /// <param name="x"></param>
         /// <param name="k">Коэффициенты по возрастанию</param>
         /// <returns></returns>
-        public static double CalculateWithForNegativeStep(int x, double[] k)
+        public static double CalculateWithForNegativeStep(int x, int[] k, out int laborIntensity)
         {
-            double result = k[^1];
+            double result = k[k.Length - 1];
+            laborIntensity = 5;
+            
             for (int i = k.Length - 2; i >= 0; i--)
             {
+                laborIntensity += 2;
                 result *= x;
                 result += k[i];
+
+                laborIntensity += 3;
             }
 
             return result;
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="k">Коэффициенты по убыванию</param>
-        /// <returns></returns>
-        public static double CalculateWithWhile(int x, double[] k)
-        {
-            double result = k[0];
-            int i = 1;
-            
-            while (i < k.Length)
-            {
-                result *= x;
-                result += k[i];
-                i++;
-            }
-
-            return result;
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="k">Коэффициенты по возрастанию</param>
-        /// <returns></returns>
-        public static double CalculateWithWhileNegativeStep(int x, double[] k)
-        {
-            double result = k[^1];
-            int i = k.Length - 2;
-            
-            while (i >= 0)
-            {
-                result *= x;
-                result += k[i];
-                i--;
-            }
-
-            return result;
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="k">Коэффициенты по возрастанию</param>
-        /// <param name="i"></param>
-        /// <returns></returns>
-        public static double CalculateRecursively(double x, double[] k, int i = 0)
-        {
-            if (i >= k.Length)
-                return 0;
-            return k[i] + x * CalculateRecursively(x, k, i + 1);
         }
     }
 }
