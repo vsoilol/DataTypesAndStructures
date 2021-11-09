@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Lab2
@@ -8,8 +7,13 @@ namespace Lab2
     {
         public static List<int> Items { get; private set; } = new List<int>();
 
-        public static int NumberPermutations { get; private set; } = 0;
+        public static int NumberPermutations { get; private set; }
 
+        /// <summary>
+        /// сортировка с помощью прямого выбора при помощи поиска
+        /// минимального элемента. Сортировка выбором
+        /// </summary>
+        /// <param name="items"></param>
         public static void MakeSelectionSort(IEnumerable<int> items)
         {
             Items = items.ToList();
@@ -33,13 +37,17 @@ namespace Lab2
             }
         }
 
+        /// <summary>
+        /// Шейкерная сортировка
+        /// </summary>
+        /// <param name="items"></param>
         public static void MakeCocktailSort(IEnumerable<int> items)
         {
             Items = items.ToList();
             NumberPermutations = 0;
 
             int left = 0, right = Items.Count - 1, last = right;
-            do
+            while (left < right)
             {
                 for (int i = left; i < right; i++)
                 {
@@ -62,7 +70,7 @@ namespace Lab2
                 }
 
                 left = last;
-            } while (left < right);
+            }
         }
 
         private static void SwapElements(int firstPosition, int secondPosition)

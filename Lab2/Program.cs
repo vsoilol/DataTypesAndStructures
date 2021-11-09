@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Lab2
 {
@@ -7,6 +8,8 @@ namespace Lab2
     {
         private static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
+            
             int arrayLength = ConsoleProvider.ReturnEnteredNumber(ConsoleProvider.EnterArrayLength);
 
             var random = new Random();
