@@ -10,27 +10,29 @@ namespace Lab3
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            var languageGroupService = new LanguageGroupService();
-            var studentService = new StudentService();
-            var students = Storage.GenerateStudents();
-
-            Console.WriteLine("Все студенты:");
-            Console.WriteLine(studentService.GetStudentsInformation(students));
-
-            var languageGroups = languageGroupService.GetLanguageGroupsByStudents(students);
-
-            Console.WriteLine("Группы языков\n");
-            foreach (var languageGroup in languageGroups)
+            while (true)
             {
-                Console.WriteLine($"Группа {languageGroup.Language.GetLocalizedString()}:");
-                Console.WriteLine(studentService.GetStudentsInformation(languageGroup.Students));
+                Console.Clear();
+
+                var baggageCount = ConsoleProvider.ReturnEnteredNumber(ConsoleProvider.EnterBaggageCount);
+                
+                var baggageService = new BaggageService();
+                var baggages = Storage.GenerateBaggages(baggageCount);
+                
+                ConsoleProvider.DisplayTextWithSeparator(baggageService.GetBaggagesInformation(baggages));
+
+                var baggagesWithEqualAmount = baggageService.GetBaggagesWithEqualAmountThings(baggages);
+                ConsoleProvider.DisplayTextWithSeparator(baggageService.GetBaggagesInformation(baggagesWithEqualAmount));
+
+                var baggageWithOneAmount = baggageService.GetBaggageWithOneAmount(baggages);
+
+                ConsoleProvider.DisplayTextWithSeparator(baggageService.IsHaveEmptyProperties(baggageWithOneAmount)
+                    ? ConsoleProvider.NoBaggage
+                    : baggageWithOneAmount.ToString());
+
+
+                Console.ReadLine();
             }
-
-            var studentsByEnglishLanguage = studentService
-                .GetStudentsByLanguage(students, Language.English);
-
-            Console.WriteLine("Студенты изучающие английский:\n");
-            Console.WriteLine(studentService.GetStudentsInformation(studentsByEnglishLanguage));
         }
     }
 }
