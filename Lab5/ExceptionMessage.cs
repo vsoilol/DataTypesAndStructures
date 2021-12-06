@@ -1,6 +1,6 @@
 ﻿namespace Lab5
 {
-    public static class ExceptionMessage
+    internal static class ExceptionMessage
     {
         public const string EmptyPriorityQueue = "Приоритетная очередь пустая";
     }

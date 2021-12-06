@@ -4,15 +4,19 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using ConsoleTools;
+using Lab5.Presenters;
 using Lab5.PriorityQueue;
+using Lab5.Providers;
 
 namespace Lab5
 {
-    public static class Program
+    internal static class Program
     {
         private static void Main(string[] args)
         {
-            var priorityQueuePresenter = new PriorityQueuePresenter();
+            var provider = new ConsoleProvider();
+            
+            var priorityQueuePresenter = new PriorityQueuePresenter(provider);
             
             Console.ForegroundColor = ConsoleColor.Gray;
             var menu = new ConsoleMenu(args, level: 0)
